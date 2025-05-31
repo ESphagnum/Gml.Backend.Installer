@@ -76,6 +76,23 @@ IF EXIST .env (
     ) > frontend/Gml.Web.Client/.env
 )
 
+:: Проверка активности docker desktop
+@echo off
+:check_docker
+docker version >nul 2>&1
+if %errorlevel% equ 0 (Add commentMore actions
+    echo.
+    echo [√] Docker Desktop запущен и работает
+) else (
+    echo [X] Docker Desktop не запущен
+    echo.
+    echo 1. Откройте Docker Desktop из меню Пуск или ярлыка
+    echo 2. Ждите, когда программа полностью запустится
+    echo 3. Нажмите любую клавишу для повторной проверки...
+    pause >nul
+    goto check_docker
+)
+
 :: Запуск
 docker compose up -d
 
